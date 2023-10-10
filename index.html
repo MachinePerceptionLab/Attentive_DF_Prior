@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Learning Neural Implicit through Volume Rendering with Attentive Depth Fusion Priors.">
+  <meta name="keywords" content="LNI-ADFP">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LNI-ADFP</title>
+  <link rel="stylesheet" href="./style.css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <!-- <script type="text/javascript" src="./gb3d_bundle.js"></script> -->
+  
+</head>
+<body>
+
+<!-- 
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://junshengzhou.github.io/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://github.com/junshengzhou/3DAttriFlow">
+            3DAttriFlow
+          </a>
+          <a class="navbar-item" href="https://junshengzhou.github.io/3D-OAE">
+            3D Occlusion Auto-Encoder
+          </a>
+          <a class="navbar-item" href="https://github.com/mabaorui/NeuralPull-Pytorch">
+            Neural-Pull
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+-->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title">Learning Neural Implicit through Volume Rendering with Attentive Depth Fusion Priors</h1>
+          <div class="column is-full_width">
+            <h2 class="title is-4">NeurIPS 2023</h2>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <!-- a -->Pengchong Hu</a><sup>1</sup>
+            </span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="author-block">
+              <a href="https://h312h.github.io/">Zhizhong Han</a><sup>1</sup>
+            </span>
+          </div>
+          <!-- <div class="column is-full_width">
+            <h2 class="is-size-6">* Equal Contribution</h2> -->
+            <!-- <h2 class="is-size-6">(* equal contribution)  (<span>&#8224;</span> corresponding author)</h2> -->
+          <!-- </div> -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Wayne State University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="margin-top: -20px">Demo</h2>
+
+        <video width="800"  poster="" id="Video" autoplay controls muted loop playsinline height="10%">
+          <source src="./videos/demo.mov"
+                  type="video/mp4">
+        </video>
+        <div class="content has-text-justified">
+          <p align="center">
+            Visualization of Reconstruction in the context of SLAM.
+          </p>
+
+        </div>
+        <div class="content has-text-justified">
+          <p align="center" style="font-size:12px;">
+            (The blue in attention visualization indicates a the attention mechanism pays more attention on depth fusion priors.)
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="margin-top: -30px">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Learning neural implicit representations has achieved remarkable performance in 3D reconstruction from multi-view images. 
+            Current methods use volume rendering to render implicit representations into either RGB or depth images that are supervised by the multi-view ground truth. 
+            However, rendering a view each time suffers from incomplete depth at holes and unawareness of occluded structures from the depth supervision, which severely affects the accuracy of geometry inference via volume rendering. 
+            To resolve this issue, we propose to learn neural implicit representations from multi-view RGBD images through volume rendering with an attentive depth fusion prior. 
+            Our prior allows neural networks to sense coarse 3D structures from the Truncated Signed Distance Function (TSDF) fused from all available depth images for rendering. 
+            The TSDF enables accessing the missing depth at holes on one depth image and the occluded parts that are invisible from the current view. By introducing a novel attention mechanism, we allow neural networks to directly use the depth fusion prior with the inferred occupancy as the learned implicit function. 
+            Our attention mechanism works with either a one-time fused TSDF that represents a whole scene or an incrementally fused TSDF that represents a partial scene in the context of Simultaneous Localization and Mapping (SLAM). 
+            Our evaluations on widely used benchmarks including synthetic and real-world scans show our superiority over the latest neural implicit methods.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="margin-top: -20px">Video</h2>
+
+        <video width="680"  poster="" id="Video" autoplay controls muted loop playsinline height="10%">
+          <source src="./videos/Method.mp4"
+                  type="video/mp4">
+        </video>
+        <div class="content has-text-justified">
+          <p>
+
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+  </div>
+</section>
+<!-- <h2 class="subtitle has-text-centered">
+  <strong>CAP-UDF</strong> learns a continuous UDF to represent shapes with arbitary architecture.
+</h2> -->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="margin-top: -20px">Method</h2>
+
+        <img src="./images/overview.png" class="center">
+        <div class="content has-text-justified">
+          <p style="margin-top: 30px">
+            <b>Overview of our method.</b> We learn the occupancy function through volume rendering using RGBD images as supervision in the context of SLAM. 
+            For each sample query along the shooting rays from the current view, we employ learnable feature grids covering the scene to interpolate its hierarchical geometry features and color feature.
+            For queries inside the bandwidth of a TSDF grid fused from available depth images, we leverage its interpolation from TSDF grid as a prior of coarse occupancy estimation. 
+            The prior is attentive by a neural function which determines the occupancy function by combining currently fused geometry and the learned coarse estimation with learned attention weights.
+            Finally, we use the occupancy function and the color function to render color and depth images through volume rendering. With a learned occupancy function, we run the marching cubes to reconstruct a surface.
+          </p>
+        </div>
+
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+  </div>
+</section>
+
+<style>
+
+  .box .left{
+      width:480px;
+      position:absolute;
+     
+  }
+
+  .box .right{
+      width:480px;
+      position:absolute;
+
+  }
+  </style>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Method. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered" style="margin-top: -20px">Experimental Results</h2>
+        <h3 class="title is-4">Replica Dataset</h3>
+        <h4 class="title is-4 has-text-centered">NICE-SLAM &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Ours</h4>
+          <div style="float: left;">
+          <video width="480"  poster="" id="Video" autoplay controls muted loop playsinline height="10%">
+            <source src="./videos/nice.mp4"
+                    type="video/mp4">
+          </video></div><div style="float: right;">
+          <video width="480"  poster="" id="Video" autoplay controls muted loop playsinline height="10%" >
+            <source src="./videos/our.mp4"
+                    type="video/mp4">
+          </video></div>
+        <h3 class="title is-4">ScanNet Dataset</h3>
+        <h4 class="title is-4 has-text-centered">NICE-SLAM &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Ours</h4>
+          <div style="float: left;">
+            <video width="480"  poster="" id="Video" autoplay controls muted loop playsinline height="10%">
+              <source src="./videos/nice1.mp4"
+                      type="video/mp4">
+            </video></div><div style="float: right;">
+            <video width="480"  poster="" id="Video" autoplay controls muted loop playsinline height="10%" >
+              <source src="./videos/our1.mp4"
+                      type="video/mp4">
+            </video></div>
+
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+  </div>
+</section>
+
+
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{Hu2023LNI-ADFP,
+      title = {Learning Neural Implicit through Volume Rendering with Attentive Depth Fusion Priors},
+      author = {Hu, Pengchong and Han, Zhizhong},
+      booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+      year = {2023}
+    }
+  </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This webpage template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+</body>
+</html>
