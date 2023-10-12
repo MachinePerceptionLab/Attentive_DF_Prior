@@ -96,19 +96,22 @@
           </div>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <!-- a -->Pengchong Hu</a><sup>1</sup>
+              <!-- a -->Pengchong Hu</a><sup></sup>
             </span>&nbsp;&nbsp;&nbsp;&nbsp;
             <span class="author-block">
-              <a href="https://h312h.github.io/">Zhizhong Han</a><sup>1</sup>
+              <a href="https://h312h.github.io/">Zhizhong Han</a><sup></sup>
             </span>
           </div>
           <!-- <div class="column is-full_width">
             <h2 class="is-size-6">* Equal Contribution</h2> -->
             <!-- <h2 class="is-size-6">(* equal contribution)  (<span>&#8224;</span> corresponding author)</h2> -->
           <!-- </div> -->
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>Wayne State University</span>
-          </div>
+          <div class="is-size-5 publication-authors" class="row"> <p class="affiliation">Machine Perception Lab</p> </div>
+                        <div class="is-size-5 publication-authors" class="row"> <p class="affiliation">Wayne State University</p> </div>
+                        <div class="is-size-5 publication-authors" class="row"> <p class="affiliation">Detroit, USA</p> </div>
+          <!-- <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup></sup>Machine Perception Lab, Wayne State University, Detroit, USA</span>
+          </div> -->
 
           <div class="column has-text-centered">
             <div class="publication-links">
@@ -163,7 +166,7 @@
         </div>
         <div class="content has-text-justified">
           <p align="center" style="font-size:12px;">
-            (The blue in attention visualization indicates a the attention mechanism pays more attention on depth fusion priors.)
+            (The blue in attention visualization indicates the attention mechanism pays more attention on depth fusion priors.)
           </p>
 
         </div>
@@ -278,16 +281,22 @@
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3 has-text-centered" style="margin-top: -20px">Experimental Results</h2>
+        <div class="content has-text-justified">
+          <p align="center" style="font-size:12px;">
+            (Red in error maps indicates large errors.)
+          </p>
+
+        </div>
         <h3 class="title is-4">Replica Dataset</h3>
         <h4 class="title is-4 has-text-centered">NICE-SLAM &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Ours</h4>
           <div style="float: left;">
           <video width="480"  poster="" id="Video" autoplay controls muted loop playsinline height="10%">
-            <source src="./videos/nice.mp4"
+            <source src="./videos/nice_replica.mp4"
                     type="video/mp4">
           </video></div><div style="float: right;">
           <video width="480"  poster="" id="Video" autoplay controls muted loop playsinline height="10%" >
-            <source src="./videos/our.mp4"
+            <source src="./videos/our_replica.mp4"
                     type="video/mp4">
           </video></div>
         <h3 class="title is-4">ScanNet Dataset</h3>
@@ -295,13 +304,14 @@
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Ours</h4>
           <div style="float: left;">
             <video width="480"  poster="" id="Video" autoplay controls muted loop playsinline height="10%">
-              <source src="./videos/nice1.mp4"
+              <source src="./videos/nice_scannet.mp4"
                       type="video/mp4">
             </video></div><div style="float: right;">
             <video width="480"  poster="" id="Video" autoplay controls muted loop playsinline height="10%" >
-              <source src="./videos/our1.mp4"
+              <source src="./videos/our_scannet.mp4"
                       type="video/mp4">
             </video></div>
+            
 
       </div>
     </div>
